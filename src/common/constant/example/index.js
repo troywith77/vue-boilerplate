@@ -1,0 +1,1 @@
+export const EXAMPLE_TITLE = 'EXAMPLE_TITLE'
