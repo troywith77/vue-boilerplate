@@ -1,4 +1,4 @@
-import { toJSTimeStamp } from '@@@/util/timestamp'
+import { toJSTimeStamp } from '@@@/utils/timestamp'
 
 export function exampleTransformer(res) {
   return {

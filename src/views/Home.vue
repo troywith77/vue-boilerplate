@@ -7,8 +7,8 @@
 
 <script>
 import * as Cookies from 'js-cookie'
-import ExampleService from '@@@/domain/example/ExampleService'
-import { ApiError } from '@@@/util/error/api'
+import ExampleService from '@@@/domains/example/ExampleService'
+import { ApiError } from '@@@/apis/utils/error'
 
 import HelloWorld from '@/components/HelloWorld'
 

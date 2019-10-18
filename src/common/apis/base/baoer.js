@@ -1,7 +1,7 @@
 import axios from 'axios'
 import * as Cookies from 'js-cookie'
 import conf from '@/conf'
-import { HttpError, HttpUnknownError, ApiError } from '@@@/util/error'
+import { HttpError, HttpUnknownError, ApiError } from '@@@/apis/utils/error'
 
 const api = axios.create({
   baseURL: conf.baseUrl.baoer,
