@@ -1,27 +1,21 @@
 import axios from 'axios'
 import * as Cookies from 'js-cookie'
 import conf from '@/conf'
-import { HttpError, HttpUnknownError, ApiError } from '@@@/apis/utils/error'
+import { HttpError, BusinessError } from '@@@/apis/utils/error'
 
 const api = axios.create({
   baseURL: conf.baseUrl.baoer,
-  timeout: 10 * 1000
+  timeout: 20 * 1000
 })
 
 api.interceptors.request.use((config) => {
-  const token = Cookies.get('_appToken')
-  const tokenHeader = token ? {
-    'X-Ivanka-Token': token
-  } : null
-  const formatter = config.url.includes('baoer_backend') ? {
-    'X-JSON-Naming-Strategy': 'LowerCaseWithUnderscores'
-  } : null
+  const token = Cookies.get('_token')
+  const tokenHeader = token ? null : null
   const conf = {
     ...config,
     headers: {
       ...config.headers,
       ...tokenHeader,
-      ...formatter,
     }
   }
   return conf
@@ -29,20 +23,34 @@ api.interceptors.request.use((config) => {
 
 // 只有 http code 是 200 且接口定义的 code 是 20000 才属于正确返回的接口，才能进入 Promise then。
 
-api.interceptors.response.use((response) => {
-  const { code, data, message } = response.data || {}
-  if (code === 20000) {
-    return data
+api.interceptors.response.use(handleBusinessError, handleErrorLogger)
+api.interceptors.response.use(undefined, handleHttpError)
+
+// 判断业务逻辑是否错误
+function handleBusinessError(response) {
+  if (!response.data || response.data.code !== 20000) {
+    throw new BusinessError(response.data.message, response.data)
   }
-  // response.data -> { code, data, message }
-  return Promise.reject(new ApiError(message, response.data))
-}, (error) => {
-  // status 非 200 的接口在这里处理
-  // { ...error } -> { config, request, response ... }
+  return response.data.data
+}
+
+// 记录 API 请求错误
+function handleErrorLogger(error) {
+  throw error
+}
+
+// 处理 HTTP 错误
+function handleHttpError(error) {
   if (error.response) {
-    return Promise.reject(new HttpError(error.message, { ...error }))
+    const { url } = error.config
+    const { status } = error.response
+    throw new HttpError(error.message, {
+      status,
+      url,
+    })
+  } else {
+    throw error
   }
-  return Promise.reject(new HttpUnknownError(error.message))
-})
+}
 
 export default api

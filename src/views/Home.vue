@@ -8,7 +8,7 @@
 <script>
 import * as Cookies from 'js-cookie'
 import ExampleService from '@@@/domains/example/ExampleService'
-import { ApiError } from '@@@/apis/utils/error'
+import { HttpError, BusinessError } from '@@@/apis/utils/error'
 
 import HelloWorld from '@/components/HelloWorld'
 
@@ -25,8 +25,10 @@ export default {
         console.log(res)
       })
       .catch((err) => {
-        if (err instanceof ApiError) {
+        if (err instanceof BusinessError) {
           console.log(err.props)
+        } else if (err instanceof HttpError) {
+          console.log(err.status)
         }
       })
   },

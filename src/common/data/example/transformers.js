@@ -4,7 +4,6 @@ export function exampleTransformer(res) {
   return {
     order: res.order,
     type: res.type,
-    updatedAt: toJSTimeStamp(res.updated_at),
     items: (res.items || []).map(item => ({
       createdAt: toJSTimeStamp(item.created_at),
       backgroundColor: item.background_color,
