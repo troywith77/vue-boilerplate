@@ -1,12 +1,24 @@
 <template>
   <div :class="$style.loginPage">
-    <button>Login</button>
+    <button @click="handleLogin">Login</button>
   </div>
 </template>
 
 <script>
-export default {
+import { mapActions } from 'vuex'
 
+export default {
+  methods: {
+    ...mapActions('user', ['login']),
+    handleLogin() {
+      this.login()
+        .then(() => {
+          this.$router.replace({
+            name: 'home',
+          })
+        })
+    },
+  },
 }
 </script>
 

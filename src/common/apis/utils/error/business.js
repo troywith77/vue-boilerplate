@@ -1,4 +1,4 @@
-import CustomError from '@@@/utils/CustomError'
+import CustomError from './lib/CustomError'
 
 // 业务 error | code !== 20000
 export class BusinessError extends CustomError {

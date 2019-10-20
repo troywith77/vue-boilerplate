@@ -1,4 +1,4 @@
-import CustomError from '@@@/utils/CustomError'
+import CustomError from './lib/CustomError'
 
 // HTTP status code !== 200
 export class HttpError extends CustomError {

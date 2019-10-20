@@ -1,8 +1,8 @@
 import VConsole from 'vconsole'
 import Vue from 'vue'
 import App from '@/App'
-import router from '@/router'
 import store from '@/store'
+import router from '@/router'
 import '@/styles/global.scss'
 
 Vue.config.productionTip = false
