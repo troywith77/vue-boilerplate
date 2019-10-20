@@ -1,5 +1,5 @@
 html {
-  min-height: 100%;
+  height: 100%;
   font-family: PingFang SC, -apple-system, BlinkMacSystemFont, 'Segoe UI',
     'Roboto', 'Helvetica Neue', Microsoft Yahei, Arial, sans-serif;
   background: #fafafc;
@@ -7,4 +7,9 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
+}
+
+body,
+#app {
+  height: 100%;
 }
