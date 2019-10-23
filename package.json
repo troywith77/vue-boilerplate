@@ -2,7 +2,6 @@
   "name": "@lui/vue-boilerplate",
   "author": "Tang Rui <ruitang307@gmail.com>",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "start": "vue-cli-service serve --mode development",
     "build": "vue-cli-service build --mode production",
