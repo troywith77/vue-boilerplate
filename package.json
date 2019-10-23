@@ -1,5 +1,5 @@
 {
-  "name": "@lui/vue-boilerplate",
+  "name": "@ray2ray/vue-boilerplate",
   "author": "Tang Rui <ruitang307@gmail.com>",
   "version": "0.1.0",
   "scripts": {
@@ -7,6 +7,9 @@
     "build": "vue-cli-service build --mode production",
     "build:sit": "vue-cli-service build --mode sit",
     "lint": "vue-cli-service lint"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
     "axios": "^0.19.0",
